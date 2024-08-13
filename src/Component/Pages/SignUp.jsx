@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
-import axios from 'axios';
 import React from 'react';
-import { Link,Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { signUp } from '../Utils/api';
 
 
 class Sign extends React.Component {
@@ -12,49 +12,34 @@ class Sign extends React.Component {
       name: '',
       email: '',
       password: '',
-      navigation:false,
-      
+      navigation: false,
+
     };
   }
 
   handleClick = async () => {
     try {
-      const response = await axios.post("https://api.escuelajs.co/api/v1/users/", {
-        name: this.state.name,
-        email: this.state.email,
-        password: this.state.password,
-        avatar: "https://api.lorem.space/image/face?w=640&h=480"
-      });
-
-
+      const response = await signUp(this.state)
       if (response.status === 200 || response.status === 201) {
-        // console.log("you have Sucessfully create a account", response)
         toast.success('Your Account Has been Created ', {
           position: "top-right",
           autoClose: 5000,
-       
         });
         this.setState({
-          navigation:true,
+          navigation: true,
         })
-        // window.location.href = "/Login"
-      } else {
-        console.log("there is some error", response)
-
-      }
-
+      } 
     }
     catch (error) {
       console.log(error)
       this.setState({
         navigation: false,
       })
-
     }
-
-
-
   }
+  
+
+
   handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
@@ -63,8 +48,8 @@ class Sign extends React.Component {
   };
 
   render() {
-    if(this.state.navigation){
-     return  <Navigate to={"/Login"}/>
+    if (this.state.navigation) {
+      return <Navigate to={"/Login"} />
     }
     // const { fullName, email, password } = this.state;
 

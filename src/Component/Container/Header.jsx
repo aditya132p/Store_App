@@ -1,8 +1,8 @@
 import { Heart, ShoppingCart } from 'lucide-react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { handleLogout } from '../Utils/index'
 const Header = (props) => {
+  const { handelLogout } = props;
   /* eslint-disable react/prop-types */
   return (
     <div className="fixed z-30 backdrop-blur-lg w-full  py-3 drop-shadow-sm">
@@ -46,7 +46,7 @@ const Header = (props) => {
             props.isLogedin
               ? <>
                 <a href="#" className=" text-white px-5 py-1.5 bg-black rounded-lg font-semiboldhover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-colors ease-in">👋 Hello, {props.username}❤️</a>
-                <a href="#" onClick={handleLogout} className=" text-white px-5 py-1.5 ml-3 bg-black rounded-lg font-semiboldhover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-colors ease-in">Logout</a>
+                <a href="#" onClick={handelLogout} className=" text-white px-5 py-1.5 ml-3 bg-black rounded-lg font-semiboldhover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black transition-colors ease-in">Logout</a>
               </> :
               <>
                 <Link to="/Login"

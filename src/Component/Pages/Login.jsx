@@ -1,10 +1,10 @@
 
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
+import { login } from "../Utils/api";
 
 const Login = () => {
   const {
@@ -17,21 +17,21 @@ const Login = () => {
 
   const onHandleSubmit = async (data) => {
     try {
-      const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", data);
+      const response = await login(data);
+
       if (response.status === 200 || response.status === 201) {
-        // console.log("Login successful:", response.data);
+        localStorage.setItem("token", response.data.access_token);
         toast.success('🦄 Login successful', {
           position: "top-right",
           autoClose: 5000,
         });
-        // console.log(response.headers);
-        localStorage.setItem("token", response.data.access_token); // Save the token in localStorage
         navigate("/")
-        // You can redirect the user or save the token in local storage
       }
-    } catch (error) {
+
+    }
+    catch (error) {
       if (error.response && error.response.status === 401) {
-        // console.log("Email or password is incorrect");
+
         toast.error('Email or password is incorrect', {
           position: "top-right",
           autoClose: 5000,
@@ -115,10 +115,10 @@ const Login = () => {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        // stroke-width="2"
-                        // stroke-linecap="round"
-                        // stroke-linejoin="round"
-                        // className="ml-2"
+                      // stroke-width="2"
+                      // stroke-linecap="round"
+                      // stroke-linejoin="round"
+                      // className="ml-2"
                       >
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
