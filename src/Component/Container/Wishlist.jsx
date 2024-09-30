@@ -1,24 +1,31 @@
 
 import { Trash, Heart } from 'lucide-react'
-// import { useState } from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useOutletContext } from 'react-router-dom';
-
+// import { useOutletContext } from 'react-router-dom';
 
 
 function Wishlist() {
-  const cardProducts = useOutletContext()[1];
-  // console.log(useOutletContext(),cardProducts,"HELLO")
-  const  products =[...cardProducts]
+  let containProduct = useSelector(state => state.wishlist.wishlistCart)
 
+  const [favProduct, setfavProduct] = useState([])
+  const [totalAmount, setTotalAmount] = useState(0)
+  useEffect(()=>{
+    setfavProduct(containProduct)
+    setTotalAmount(containProduct.reduce((acc, product) => acc + product.price, 0)) 
 
-
+    console.log(containProduct)
+  },[containProduct])
+ 
+  
   return (
     <div className="mx-auto  flex max-w-3xl flex-col space-y-4  p-6 px-2 sm:p-10 sm:px-2">
       <h2 className="text-3xl pt-10 pb-4 font-bold">Wishlist</h2>
       
       <ul className="flex flex-col divide-y gap-4  divide-gray-200">
-        {products.map((product) => (
+        {favProduct.map((product) => (
           <li key={product.id} className="flex rounded-md bg-white px-6 flex-col py-6 sm:flex-row sm:justify-between">
             <div className="flex w-full space-x-2 sm:space-x-4">
               <img
@@ -54,7 +61,7 @@ function Wishlist() {
       <div className="space-y-1 text-right">
         <p>
           Total amount:
-          <span className="font-semibold"> ₹48,967</span>
+          <span className="font-semibold text-green-600"> ₹ {totalAmount * 80}</span>
         </p>
       </div>
       <div className="flex justify-end space-x-4">

@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { login } from "../Utils/api";
+import Spinner from "../Common/Spinner";
+import { useState } from "react";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false)
   const {
     register,
     handleSubmit,
@@ -14,9 +17,12 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate()
-
+if (loading){
+  return <Spinner/>
+}
   const onHandleSubmit = async (data) => {
     try {
+      setLoading(true)
       const response = await login(data);
 
       if (response.status === 200 || response.status === 201) {
@@ -25,13 +31,16 @@ const Login = () => {
           position: "top-right",
           autoClose: 5000,
         });
+        setLoading(false)
         navigate("/")
+
       }
 
     }
     catch (error) {
+      setLoading(false)
       if (error.response && error.response.status === 401) {
-
+      
         toast.error('Email or password is incorrect', {
           position: "top-right",
           autoClose: 5000,

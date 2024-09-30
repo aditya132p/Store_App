@@ -9,33 +9,13 @@ import { toast } from 'react-toastify';
 
 /* eslint-disable react/prop-types */
 const Layout = () => {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState("")
-  const [isLogin, setIsLogin] = useState(false)
-  const [cartCount, setcartCount] = useState(0)
-  const [cardProducts, setCardProduct] = useState([])
+  const [username, setUsername] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
 
-  const addToCart = (data) => {
-    let check = cardProducts.some(value => value.id === data.id)
-
-    if (!check) {
-      if (localStorage.token) {
-        setcartCount(cartCount + 1)
-        setCardProduct([...cardProducts, data]);
-      } else {
-        navigate('/SignUp');
-      }
-    } else {
-      // c  onsole.log("items already exits")
-    }
-  }
-  // console.log(cardProducts);
-  // console.log(localStorage.getItem("token"))
-const Navigate = useNavigate()
+  const Navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem("token")
     setIsLogin(false)
-    //   window.location.reload()
     Navigate("/Login")
     toast.error('logout', {
       position: "top-right",
@@ -49,6 +29,8 @@ const Navigate = useNavigate()
     });
   }
 
+// This useEffect fetch user profile form api with the help of token that store in local-storage
+
   useEffect(() => {
     (async () => {
       try {
@@ -56,16 +38,32 @@ const Navigate = useNavigate()
         setIsLogin(true)
         setUsername(response.data.name)
       } catch (error) {
-        console.log(error)
+        console.log(error.message)
       }
     })()
 
   }, [isLogin])
 
+
+  // const handleProductClick = async (getId) => {
+  //   // console.log(getId)
+
+  //   try {
+  //     const response = await axios.get(`https://api.escuelajs.co/api/v1/products/${getId}`)
+  //     setgetSingleProduct(response.data)
+  //     navigate("/ProductDetails")
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+  // }
+
   return (
     <div className='bg-yellow-100 '>
-      <Header isLogedin={isLogin} username={username} cartCount={cartCount} handelLogout={handleLogout} />
-      <Outlet context={[addToCart, cardProducts, setCardProduct]} />
+      <Header isLogedin={isLogin} username={username}  handelLogout={handleLogout} />
+      <Outlet 
+      // context={[ cardProducts, setCardProduct, getSingleProduct, handleProductClick]}
+       />
       <Footer />
     </div>
 

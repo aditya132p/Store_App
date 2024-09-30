@@ -1,19 +1,24 @@
-import axios from "axios"
+
 import { Search } from "lucide-react"
 import { useEffect, useState } from "react"
+import {useDispatch} from "react-redux"
+import { sagaSearchProduct } from "../store/Product/product.action"
+// import {sagaSearchProduct} from "../store/Product/product.action"
+// import { searchProdSaga } from "../store/Product/product.saga"
 
 const SearchInput = () => {
+
+     let searchInp = useDispatch()
      const [input , setInput] =useState([])
+     
      useEffect(()=>{
        const getData =  setTimeout(()=>{
-           axios.get(`https://api.escuelajs.co/api/v1/products/?title=${input}`)
-           .then((response) => {
-               console.log(response.data);
-           });
-       }, 2000)
+           searchInp(sagaSearchProduct(input))
+        //    console.log("searech")
+       }, 500)
          return () => clearTimeout(getData)
 
-     },[input])
+     }, [input,searchInp])
 
 
   return (
