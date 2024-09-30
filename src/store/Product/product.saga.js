@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from "redux-saga/effects";
-import productResponse, { searchProduct } from "./product.api";
+import productResponse, { categoriesSearch, searchProduct } from "./product.api";
 
 function* getProductSaga() {
     try {
@@ -27,11 +27,25 @@ function* searchProductSaga(action){
         payload:response
     })
 }
+function* getCategory(action){
+    const response = yield call(categoriesSearch, action.payload)
+    console.log(response)
+    yield put({
+        type: "GET_CATEGORY",
+        payload: response
+    })
+
+}
 
 export function* productsSagas() {
     yield takeLatest("SAGA_GET_PRODUCT", getProductSaga);
-   
 }
+
 export function* searchProdSaga (){
     yield takeLatest("SAGA_PRODUCT_SEARCH", searchProductSaga);
+}
+
+export function* getCategorySaga() {
+    yield takeLatest("SAGA_GET_CATEGORY", getCategory )
+   
 }

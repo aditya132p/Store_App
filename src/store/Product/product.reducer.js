@@ -27,6 +27,12 @@ const productReducer = (state = initialState, action) => {
                 products: action.payload,  // Store the update state by search 
             };
 
+        case "GET_CATEGORY":
+        return {
+            ...state,
+            products: action.payload,
+        }
+
         default:
             return state;
     }

@@ -11,6 +11,16 @@ const sagaGetProduct = (payload) => ({
     payload
 });
 
+// get category 
+const getCategory = (payload) => ({
+    type: "GET_CATEGORY",
+    payload
+});
+const sagaGetCategory = (payload) => ({
+    type: "SAGA_GET_CATEGORY",
+    payload
+});
+
 
 // Search Product
 const searchProduct = (payload) => ({
@@ -28,6 +38,8 @@ const sagaSearchProduct = (payload) =>({
 export {
     getProduct,
     searchProduct,
+    getCategory,
+    sagaGetCategory,
     sagaGetProduct,
     sagaSearchProduct
 };

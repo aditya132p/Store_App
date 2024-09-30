@@ -41,7 +41,7 @@ const ProductList = () => {
 
   return (
 
-    <div className="min-h-full py-32  px-4 max-w-screen-xl grid grid-cols-4 gap-x-6 grid-rows-1 max-sm:grid-cols-1 max-md:grid-cols-2  max-lg:grid-cols-3 max-sm:w-96 gap-y-9 mx-auto">
+    <div className="min-h-full py-32  px-4 w-[80%] grid grid-cols-3 gap-x-6 grid-rows-1 max-sm:grid-cols-1 max-md:grid-cols-2  max-lg:grid-cols-3 max-sm:w-96 gap-y-9 mx-auto">
       {products.length > 0 ? (
         products.map((product, idx) => (
             

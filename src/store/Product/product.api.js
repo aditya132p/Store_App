@@ -4,13 +4,25 @@ const productResponse = async () => {
   try {
 
     // add some changes now  links was change 
-    const response = await axios.get("https://fakestoreapi.com/products");
+    const response = await axios.get("https://api.escuelajs.co/api/v1/products");
     return response.data;  // No need to store it in a separate variable
   } catch (error) {
     console.error("API error:", error);  // Log the error for debugging
     throw error;  // Throw the error to be caught in the saga
   }
 };
+
+const categoriesSearch = async (id)=>{
+
+try {
+  const response = await axios.get(`https://api.escuelajs.co/api/v1/products/?categoryId=${id}`);
+  console.log("api",response.data)
+  return response.data;
+} catch (error) {
+  console.log(error)
+}
+
+}
 
 const searchProduct  = async(search)=>{
   try{
@@ -24,5 +36,5 @@ const searchProduct  = async(search)=>{
   }
 }
 export default productResponse;
-export {  searchProduct} ;
+export { searchProduct, categoriesSearch } ;
 

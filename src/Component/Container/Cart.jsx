@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { sagaRemoveProducts } from '../../store/Cart/cart.action';
 
 
+export default function Cart() {
 
-export function Cart() {
+
     const products = useSelector(state => state.cartItems.productsCart)
     const dispatch = useDispatch()
     const totalPrice = products.reduce((acc, product) => acc + product.price, 0);
@@ -54,9 +55,7 @@ export function Cart() {
                                                         ) : null}
                                                     </div>
                                                     <div className="mt-1 flex items-end">
-                                                        {/* <p className="text-xs font-medium text-gray-500 line-through">
-                                                            {product.originalPrice}
-                                                        </p> */}
+                                                       
                                                         <p className="text-sm font-medium text-green-900">
                                                             &nbsp;&nbsp; MRP : ₹ {product.price * 80}
                                                         </p>
@@ -141,5 +140,3 @@ export function Cart() {
         </div>
     )
 }
-
-

@@ -8,6 +8,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Protect from './Routes/Protect';
 import { sagaGetProduct } from './store/Product/product.action';
+import Spinner from './Component/Common/Spinner';
 
 // Lazy load components
 const Sign = lazy(() => import('./Component/Pages/SignUp'));
@@ -21,33 +22,33 @@ const Cart = lazy(() => import('./Component/Container/Cart'));
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Suspense fallback={<div>Loading...</div>}><Layout /></Suspense>,
+    element: <Suspense fallback={<Spinner />}><Layout /></Suspense>,
     children: [
       {
         path: "",
-        element: <Suspense fallback={<div>Loading...</div>}><Home /></Suspense>,
+        element: <Suspense fallback={<Spinner />}><Home /></Suspense>,
       },
       {
         path: "/wishlist",
-        element: <Suspense fallback={<div>Loading...</div>}><Wishlist /></Suspense>,
+        element: <Suspense fallback={<Spinner />}><Wishlist /></Suspense>,
       },
       {
         path: "/product/:id",
-        element: <Suspense fallback={<div>Loading...</div>}><ProductDetails /></Suspense>,
+        element: <Suspense fallback={<Spinner />}><ProductDetails /></Suspense>,
       },
       {
         path: "/Cart",
-        element: <Suspense fallback={<div>Loading...</div>}><Cart /></Suspense>,
+        element: <Suspense fallback={<Spinner/>}><Cart /></Suspense>,
       },
     ],
   },
   {
     path: "SignUp",
-    element: <Protect><Suspense fallback={<div>Loading...</div>}><Sign /></Suspense></Protect>,
+    element: <Protect><Suspense fallback={<Spinner />}><Sign /></Suspense></Protect>,
   },
   {
     path: "Login",
-    element: <Protect><Suspense fallback={<div>Loading...</div>}><Login /></Suspense></Protect>,
+    element: <Protect><Suspense fallback={<Spinner />}><Login /></Suspense></Protect>,
   }
 ]);
 

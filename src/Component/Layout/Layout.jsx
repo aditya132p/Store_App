@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Sidebar from '../Sidebar';
 
 
 /* eslint-disable react/prop-types */
@@ -61,9 +62,9 @@ const Layout = () => {
   return (
     <div className='bg-yellow-100 '>
       <Header isLogedin={isLogin} username={username}  handelLogout={handleLogout} />
-      <Outlet 
-      // context={[ cardProducts, setCardProduct, getSingleProduct, handleProductClick]}
-       />
+      
+        <Outlet />
+      
       <Footer />
     </div>
 
